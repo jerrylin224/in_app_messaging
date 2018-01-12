@@ -1,5 +1,9 @@
 <% page_header "Conversation" %>
 
+<p>Chatting with
+  <%= render 'conversations/participants', conversation: @conversation %>
+</p>
+
 <div class="panel panel-default">
   <div class="panel-heading"><%= @conversation.subject %></div>
 
@@ -24,6 +28,11 @@
 </div>
 
 <%= form_tag reply_conversation_path(@conversation), method: :post do %>
+  <div class="form-group">
+    <%= label_tag 'message[subject]', 'Subject' %>
+    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+  </div>
+  
   <div class="form-group">
     <%= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true %>
   </div>

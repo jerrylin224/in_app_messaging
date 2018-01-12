@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index]
+
   resources :messages, only: [:new, :create]
 
   root to: 'conversations#index'

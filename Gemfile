@@ -28,6 +28,7 @@ gem 'devise'
 gem 'mailboxer'
 gem 'chosen-rails'
 # gem 'sass-rails', '~> 4.0.5'
+gem 'gravatar_image_tag'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-turbolinks'
 
