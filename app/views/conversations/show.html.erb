@@ -5,13 +5,20 @@
 
   <div class="panel-body">
     <div class="messages">
+    <ul>
       <% @conversation.receipts_for(current_user).each do |receipt| %>
         <% message = receipt.message %>
 
-        <%= message.sender.name %>
-          says at <%= message.created_at.strftime("%F %T") %>
-        <%= message.body %>
+        <li>
+        <% if current_user.name == message.sender.name %>
+          You
+        <% else %>
+          <%= message.sender.name %> 
+        <% end %>
+          says: <%= message.body %> at <%= message.created_at.strftime("%F %T") %>
+        </li>
       <% end %>
+    </ul>
     </div>
   </div>
 </div>
