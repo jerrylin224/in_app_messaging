@@ -1,4 +1,6 @@
 class ConversationsController < ApplicationController
+  REPLY_SUBJECT_PREFIX = "Re:"
+
   before_action :authenticate_user!
   before_action :get_mailbox
   before_action :get_conversation, except: [:index, :empty_trash]
@@ -25,9 +27,16 @@ class ConversationsController < ApplicationController
   end
 
   def reply
-    current_user.reply_to_conversation(@conversation, params[:body], "test")
-    flash[:success] = 'Reply sent'
+    # byebug
+    # current_user.reply_to_conversation(@conversation, params[:body], subject="test")
+    # current_user.reply_to_sender(@conversation.receipts.last, params[:body], "Reply")
+    # flash[:success] = 'Reply sent'
+    # redirect_to conversation_path(@conversation)
+    recipients = User.where(id: @conversation.receipts.last.receiver_id)
+    conversation = current_user.send_message(recipients, params[:message][:body], replied_subject).conversation
+    flash[:success] = "Message has been replied!"
     redirect_to conversation_path(@conversation)
+    # redirect_to conversation_path(conversation)
   end
 
   def destroy
@@ -72,5 +81,10 @@ class ConversationsController < ApplicationController
       end
       
       @box = params[:box]
+    end
+
+    def replied_subject
+      new_subject = @conversation.subject
+      new_subject.include?(REPLY_SUBJECT_PREFIX) ? new_subject : "#{REPLY_SUBJECT_PREFIX + new_subject}"
     end
 end

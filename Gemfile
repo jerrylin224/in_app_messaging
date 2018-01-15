@@ -24,6 +24,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'kaminari'
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'cancan' # or cancancan
+gem 'draper'
+gem 'pundit'
 gem 'devise'
 gem 'mailboxer'
 gem 'chosen-rails'
