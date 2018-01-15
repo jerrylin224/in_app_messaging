@@ -9,6 +9,10 @@ class ConversationsController < ApplicationController
       @conversations = @mailbox.inbox
     elsif @box.eql? "sent"
       @conversations = @mailbox.sentbox
+    elsif @box.eql? "unread"
+      @conversations = @mailbox.inbox({:read => false})
+    elsif @box.eql? "read"
+      @conversations = @mailbox.inbox# - @mailbox.inbox({:read => false})
     else
       @conversations = @mailbox.trash
     end
@@ -17,6 +21,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @conversation.mark_as_read(current_user)
   end
 
   def reply
@@ -62,7 +67,7 @@ class ConversationsController < ApplicationController
     end
 
     def get_box
-      if params[:box].blank? or !["inbox", "sent", "trash"].include?(params[:box])
+      if params[:box].blank? or !["inbox", "sent", "trash", "read", "unread"].include?(params[:box])
         params[:box] = 'inbox'
       end
       

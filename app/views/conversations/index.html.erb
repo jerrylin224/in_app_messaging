@@ -6,6 +6,8 @@
   <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked">
       <%= mailbox_section 'inbox', @box %>
+      <%= mailbox_section 'unread', @box %>
+      <%= mailbox_section 'read', @box %>
       <%= mailbox_section 'sent', @box %>
       <%= mailbox_section 'trash', @box %>
     </ul>
