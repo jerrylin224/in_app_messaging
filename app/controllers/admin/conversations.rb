@@ -1,4 +1,4 @@
-class ConversationsController < ApplicationController
+class Admin::ConversationsController < ApplicationController
   REPLY_SUBJECT_PREFIX = "Re:"
 
   before_action :authenticate_user!

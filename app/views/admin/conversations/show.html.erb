@@ -1,0 +1,36 @@
+<% page_header "Conversation" %>
+
+<p>Chatting with
+  <%= render 'conversations/participants', conversation: @conversation %>
+</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @conversation.subject %></div>
+
+  <div class="panel-body">
+    <div class="messages">
+    <ul>
+      <% @conversation.receipts_for(current_user).each do |receipt| %>
+        <% message = receipt.message %>
+
+        <li>
+        <% if current_user.name == message.sender.name %>
+          You
+        <% else %>
+          <%= message.sender.name %> 
+        <% end %>
+          says: <%= message.body %> at <%= message.created_at.strftime("%F %T") %>
+        </li>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</div>
+
+<%= form_tag reply_conversation_path(@conversation), method: :post do %>
+  <div class="form-group">
+  <%= label_tag 'message[body]', 'Body' %>
+    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true %>
+  </div>
+  <%= submit_tag "Send Message", class: 'btn btn-primary' %>
+<% end %>

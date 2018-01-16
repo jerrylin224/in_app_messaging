@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
+
+  get "/admin/messages/new", to: "admin/messages#new"
+
   resources :users, only: [:index]
 
   resources :messages, only: [:new, :create]
