@@ -2,8 +2,11 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    byebug
     @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
-    render partial: "admin/messages/new"
+    # @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
+    # render partial: "admin/messages/new"
+    # redirect_to root_path
   end
 
   def create

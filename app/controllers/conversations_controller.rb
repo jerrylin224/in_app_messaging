@@ -14,7 +14,7 @@ class ConversationsController < ApplicationController
     elsif @box.eql? "unread"
       @conversations = @mailbox.inbox({:read => false})
     elsif @box.eql? "read"
-      @conversations = Mailboxer::Conversation.inbox(current_user) - Mailboxer::Conversation.unread(current_user)
+      @conversations = current_user.mailbox.inbox.participant(current_user).merge(Mailboxer::Receipt.is_read)
     else
       @conversations = @mailbox.trash
     end
