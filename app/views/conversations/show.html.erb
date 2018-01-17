@@ -10,9 +10,9 @@
   <div class="panel-body">
     <div class="messages">
     <ul>
+
       <% @conversation.receipts_for(current_user).each do |receipt| %>
         <% message = receipt.message %>
-
         <li>
         <% if current_user.name == message.sender.name %>
           You

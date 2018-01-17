@@ -13,6 +13,7 @@ class ConversationsController < ApplicationController
       @conversations = @mailbox.sentbox
     elsif @box.eql? "unread"
       @conversations = @mailbox.inbox({:read => false})
+      # .inbox.unread(current_user)
     elsif @box.eql? "read"
       @conversations = current_user.mailbox.inbox.participant(current_user).merge(Mailboxer::Receipt.is_read)
     else
@@ -27,7 +28,6 @@ class ConversationsController < ApplicationController
   end
 
   def reply
-    # byebug
     # current_user.reply_to_conversation(@conversation, params[:body], subject="test")
     # current_user.reply_to_sender(@conversation.receipts.last, params[:body], "Reply")
     # flash[:success] = 'Reply sent'

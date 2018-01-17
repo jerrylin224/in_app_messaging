@@ -27,7 +27,6 @@ class Admin::ConversationsController < ApplicationController
   end
 
   def reply
-    # byebug
     # current_user.reply_to_conversation(@conversation, params[:body], subject="test")
     # current_user.reply_to_sender(@conversation.receipts.last, params[:body], "Reply")
     # flash[:success] = 'Reply sent'

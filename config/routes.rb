@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
 
   get "/admin/messages/new", to: "admin/messages#new"
+  post "/admin/messages", to: "admin/messages#create"
 
   resources :users, only: [:index]
 
