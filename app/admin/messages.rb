@@ -1,12 +1,10 @@
 ActiveAdmin.register_page "Messages" do
-
-  # collection_action :new, method: :get do
-  #   @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
-  # end
-
   controller do
-     def new
-      @chosen_recipient = AdminUser.find_by(id: params[:to].to_i) if params[:to]
+    layout 'active_admin' 
+
+    def new
+      @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
+      render "admin/messages/new"#, layout: "active_admin"
     end
 
     def create
@@ -16,6 +14,11 @@ ActiveAdmin.register_page "Messages" do
       redirect_to conversation_path(conversation)
     end
   end
+
+  # page_action :new, method: :get  do
+  #   @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
+  #   render partial: "admin/messages/new"
+  # end
 
   content do
     panel "My Panel Test" do
