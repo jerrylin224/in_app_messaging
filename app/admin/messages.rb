@@ -8,7 +8,14 @@ ActiveAdmin.register_page "Messages" do
     end
 
     def create
-      recipients = User.where(id: params['recipients'])
+      byebug
+      case params[:receipients]
+      when "all"
+        recipients = User.all
+      # recipients = User.where(id: params['recipients'])
+      else
+        recipients = User.where(id: params['recipients'])
+      end
       conversation = current_admin_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
       flash[:success] = "Message has been sent!"
       redirect_to conversation_path(conversation)

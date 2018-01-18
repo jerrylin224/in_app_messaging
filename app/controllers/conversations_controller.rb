@@ -20,7 +20,7 @@ class ConversationsController < ApplicationController
       @conversations = @mailbox.trash
     end
 
-    @conversations = @conversations.page(params[:page])
+    @conversations = @conversations.page(params[:page]).per(10)
   end
 
   def show
@@ -46,6 +46,7 @@ class ConversationsController < ApplicationController
   end
 
   def new_move_to_trash
+    byebug
     redirect_to conversations_path
     # @conversation.move_to_trash(current_user)
     # flash[:success] = 'The conversation was moved to trash.'

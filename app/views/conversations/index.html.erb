@@ -17,12 +17,12 @@
       <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <% end %>
 
-    <%= form_tag new_move_to_trash_conversations_path, method: :post do %>
-      
+    <%= form_tag new_move_to_trash_conversations_path, method: :put do %>
+      <%= submit_tag "Move to trash" %>
       <ul class="list-group">
         <%= render partial: 'conversations/conversation', collection: @conversations %>
       </ul>
-      <%= submit_tag "Move to trash" %>
+      
     <% end %>
 
     <%= paginate @conversations %>

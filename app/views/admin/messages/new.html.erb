@@ -1,6 +1,6 @@
 <% page_header "Start Conversation" %>
 
-<%= form_tag admin_messages_path, method: :post do %>
+<%= form_tag admin_messages_path, method: :post, id: "new_message_form" do %>
   <fieldset class="inputs">
     <ol>
       <li class="subject input required stringish">
@@ -18,7 +18,8 @@
       <li class="receipients input required stringish">
         <div class="form-group">
           <%= label_tag 'recipients', 'Choose recipients' %>
-          <%= select_tag 'recipients', recipients_options(@chosen_recipient), multiple: true, class: 'form-control chosen-it' %>
+          
+          <%= radio_button_tag 'receipients', 'all', false %> 全部使用者<br>
         </div>
       </li>
     </ol>
@@ -26,10 +27,10 @@
   <fieldset class="actions">
     <ol>
       <li class="action input_action">
-        <%= submit_tag 'Send', class: 'btn btn-primary' %>
+        <%= submit_tag 'Send', class: 'btn btn-primary', data: { confirm: "確定送出資訊？" } %>
       </li>
       <li class="cancel">
-        <%= link_to "Cancel", admin_conversations_path %>
+        <%= link_to "Cancel", admin_conversations_path, data: { confirm: "確定取消編輯訊息？" } %>
       </li>
     </ol>
   </fieldset>

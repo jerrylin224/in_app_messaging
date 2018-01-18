@@ -11,13 +11,13 @@ Rails.application.routes.draw do
     end
 
     collection do
-      post :new_move_to_trash
+      put :new_move_to_trash
       delete :empty_trash
     end
   end
 
 
-  get "/admin/conversations/new", to: "admin/conversations#new"
+  # get "/admin/conversations/new", to: "admin/conversations#new"
   get "/admin/messages/new", to: "admin/messages#new"
   post "/admin/messages", to: "admin/messages#create"
 
