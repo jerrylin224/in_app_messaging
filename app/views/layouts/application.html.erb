@@ -25,6 +25,24 @@
       </div>
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
+          <li class="nav-item btn-group" data-behavior="notifications">
+            <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <span data-behavior="unread-count"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+              <ul>
+                <li>
+                  <a class="dropdown-item" href="#">Action</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Another action</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
           <li><%= link_to 'Your Conversations', conversations_path %></li>
           <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
