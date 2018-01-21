@@ -15,8 +15,7 @@ class ConversationsController < ApplicationController
       @conversations = @conversations.unread(current_user)
       # .inbox.unread(current_user)
     elsif @box.eql? "read"
-      # @conversations = current_user.mailbox.inbox.participant(current_user).merge(Mailboxer::Receipt.is_read)
-      @conversations = @conversations.inbox(current_user).participant(current_user).merge(Mailboxer::Receipt.is_read)
+      @conversations = @conversations.read(current_user)
     else
       @conversations = @conversations.trash(current_user)
     end
@@ -77,7 +76,7 @@ class ConversationsController < ApplicationController
   private
 
     def get_mailbox
-      @q = Mailboxer::Conversation.ransack(params[:q])
+      @q = Conversation.ransack(params[:q])
       @conversations = @q.result(distinct: true)
       # @mailbox ||= current_user.mailbox
     end
