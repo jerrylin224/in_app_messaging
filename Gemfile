@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'kaminari'
 gem 'activeadmin'
+gem 'ransack'
 
 # Plus integrations with:
 gem 'cancan' # or cancancan

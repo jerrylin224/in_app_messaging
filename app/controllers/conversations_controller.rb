@@ -8,19 +8,20 @@ class ConversationsController < ApplicationController
 
   def index
     if @box.eql? "inbox"
-      @conversations = @mailbox.inbox
+      @conversations = @conversations.inbox(current_user)
     elsif @box.eql? "sent"
-      @conversations = @mailbox.sentbox
+      @conversations = @conversations.sentbox(current_user)
     elsif @box.eql? "unread"
-      @conversations = @mailbox.inbox({:read => false})
+      @conversations = @conversations.unread(current_user)
       # .inbox.unread(current_user)
     elsif @box.eql? "read"
-      @conversations = current_user.mailbox.inbox.participant(current_user).merge(Mailboxer::Receipt.is_read)
+      # @conversations = current_user.mailbox.inbox.participant(current_user).merge(Mailboxer::Receipt.is_read)
+      @conversations = @conversations.inbox(current_user).participant(current_user).merge(Mailboxer::Receipt.is_read)
     else
-      @conversations = @mailbox.trash
+      @conversations = @conversations.trash(current_user)
     end
 
-    @conversations = @conversations.page(params[:page]).per(10)
+    @conversations = @conversations.page(params[:page]).per(20)
   end
 
   def show
@@ -76,11 +77,13 @@ class ConversationsController < ApplicationController
   private
 
     def get_mailbox
-      @mailbox ||= current_user.mailbox
+      @q = Mailboxer::Conversation.ransack(params[:q])
+      @conversations = @q.result(distinct: true)
+      # @mailbox ||= current_user.mailbox
     end
 
     def get_conversation
-      @conversation ||= @mailbox.conversations.find(params[:id])
+      @conversation ||= @conversations.find(params[:id])
     end
 
     def get_box

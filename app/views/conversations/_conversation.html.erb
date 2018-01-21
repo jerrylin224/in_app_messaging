@@ -1,25 +1,24 @@
 <li class="list-group-item clearfix">
-  <%= link_to conversation.subject, conversation_path(conversation) %>
-
-  <p><%= render 'conversations/participants', conversation: conversation %></p>
-
-  <div class="btn-group-vertical pull-right">
-    <% if conversation.is_trashed?(current_user) %>
-      <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post %>
-    <% end %>
-  </div>
-
-  
-  
     <table>
-      <tr>
-        <th></th>
-        <th>Message</th>
-      </tr>
-      <%= conversation.last_message.body %>
+      <thead>
         <tr>
-          <td><%= check_box_tag "conversation_ids[]", conversation.id %></td>
-          <td><small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%F %T") %></span>)</small></td>
+          <th></th>
+          <th>寄件人</th>
+          <th>主旨<%= link_to "▲", sort_url(@q, :subject, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :subject, default_order: :asc) %>
+</th>
+          <th>時間<%= link_to "▲", sort_url(@q, :created_at, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :created_at, default_order: :asc) %>
+</th>
         </tr>
+      </thead>
+      <tbody>
+        <% @conversations.each do |conversation| %>
+          <tr>
+            <td><%= check_box_tag "conversation_ids[]", conversation.id %></td>
+            <td><%= conversation.participants.last.name %></td>
+            <td><%= link_to conversation.subject, conversation_path(conversation) %></td>
+            <td><small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%F %T") %></span>)</small></td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
 </li>
