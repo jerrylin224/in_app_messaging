@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post :reply
       post :restore
       post :mark_as_read
+      put :toggle_pinned
     end
 
     collection do

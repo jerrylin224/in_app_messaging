@@ -19,7 +19,6 @@ class ConversationsController < ApplicationController
     else
       @conversations = @conversations.trash(current_user)
     end
-
     @conversations = @conversations.page(params[:page]).per(20)
   end
 
@@ -73,11 +72,24 @@ class ConversationsController < ApplicationController
     redirect_to conversations_path
   end
 
+  def toggle_pinned
+    if @conversation.pin == true
+      @conversation.update(pin: false)
+    else
+      @conversation.update(pin: true)
+    end
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { head :ok }
+    end
+  end
+
   private
 
     def get_mailbox
       @q = Conversation.ransack(params[:q])
-      @conversations = @q.result(distinct: true)
+      @conversations = @q.result(distinct: true).includes(:messages)#.(distinct: true)
+
       # @mailbox ||= current_user.mailbox
     end
 

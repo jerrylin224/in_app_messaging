@@ -27,19 +27,13 @@
         <% if user_signed_in? %>
           <li class="nav-item btn-group" data-behavior="notifications">
             <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span data-behavior="unread-count"></span>
+               <span data-behavior="unread-count"><%= Notification.user_unread(current_user).count %></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
               <ul>
-                <li>
-                  <a class="dropdown-item" href="#">Action</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Another action</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                  <li>
+                    <%= link_to "個人訊息頁", root_path(:box => "inbox") %>
+                  </li>
               </ul>
             </div>
           </li>

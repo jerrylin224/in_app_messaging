@@ -1,9 +1,11 @@
 <li class="list-group-item clearfix">
-    <table>
+    <table class="conversation">
       <thead>
         <tr>
           <th></th>
-          <th>寄件人</th>
+          <th>寄件人<%= link_to "▲", sort_url(@q, :messages_sender_id, default_order: :desc) %> 
+          <%= link_to "▼", sort_url(@q, :messages_sender_id, default_order: :asc) %></th>
+          <th>重要<%= link_to "▲", sort_url(@q, :pin, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :pin, default_order: :asc) %></th>
           <th>主旨<%= link_to "▲", sort_url(@q, :subject, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :subject, default_order: :asc) %>
 </th>
           <th>時間<%= link_to "▲", sort_url(@q, :created_at, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :created_at, default_order: :asc) %>
@@ -14,7 +16,8 @@
         <% @conversations.each do |conversation| %>
           <tr>
             <td><%= check_box_tag "conversation_ids[]", conversation.id %></td>
-            <td><%= conversation.participants.last.name %></td>
+            <td><%= conversation.sender_name %></td>
+            <td><%= link_to "點選", toggle_pinned_conversation_path(conversation), id: "conversation_id_#{conversation.id}", method: :put, remote: true, class: "#{conversation.pin ? 'pinned' : ''} pin_item" %></td>
             <td><%= link_to conversation.subject, conversation_path(conversation) %></td>
             <td><small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%F %T") %></span>)</small></td>
           </tr>
