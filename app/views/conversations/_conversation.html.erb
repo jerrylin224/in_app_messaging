@@ -1,4 +1,14 @@
 <li class="list-group-item clearfix">
+  <%= search_form_for @q do |f| %>
+    <%= f.label :messages_sender_id %>
+    <%= f.select :messages_sender_id_eq, [1, 2, 3] %>
+
+    <%= f.label :pin %>
+    <%= f.select :pin_eq, [true, false], class: "btn" %>
+
+    <%= f.submit "search" %>
+    <%= link_to 'clear', root_path, class: "btn btn-danger"%>
+  <% end %>
     <table class="conversation">
       <thead>
         <tr>

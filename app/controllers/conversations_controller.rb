@@ -19,7 +19,7 @@ class ConversationsController < ApplicationController
     else
       @conversations = @conversations.trash(current_user)
     end
-    @conversations = @conversations.page(params[:page]).per(20)
+    @conversations = @conversations.page(params[:page]).per(5)
   end
 
   def show
