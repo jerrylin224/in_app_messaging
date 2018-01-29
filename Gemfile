@@ -27,6 +27,9 @@ gem 'bootstrap-sass'
 gem 'kaminari'
 gem 'activeadmin'
 gem 'ransack'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'wicked_pdf'
 
 # Plus integrations with:
 gem 'cancan' # or cancancan

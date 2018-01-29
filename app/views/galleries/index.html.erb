@@ -1,0 +1,9 @@
+<ul>
+  <% @galleries.each do |gallery| %>
+    <li>
+    <%= image_tag gallery.image.thumb.url  %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New gallery", new_gallery_path %>

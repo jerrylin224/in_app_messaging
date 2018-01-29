@@ -9,6 +9,7 @@
     <%= f.submit "search" %>
     <%= link_to 'clear', root_path, class: "btn btn-danger"%>
   <% end %>
+  <%= image_tag current_user.image.thumb.url %>
     <table class="conversation">
       <thead>
         <tr>
