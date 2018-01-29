@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :galleries
 
+  resources :things
+
   resources :conversations, only: [:index, :show, :destroy] do
     member do
       post :reply

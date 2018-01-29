@@ -30,6 +30,7 @@ gem 'ransack'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Plus integrations with:
 gem 'cancan' # or cancancan
