@@ -23,16 +23,22 @@
 </th>
         </tr>
       </thead>
-      <tbody>
-        <% @conversations.each do |conversation| %>
-          <tr>
-            <td><%= check_box_tag "conversation_ids[]", conversation.id %></td>
-            <td><%= conversation.sender_name %></td>
-            <td><%= link_to "點選", toggle_pinned_conversation_path(conversation), id: "conversation_id_#{conversation.id}", method: :put, remote: true, class: "#{conversation.pin ? 'pinned' : ''} pin_item" %></td>
-            <td><%= link_to conversation.subject, conversation_path(conversation) %></td>
-            <td><small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%F %T") %></span>)</small></td>
-          </tr>
-        <% end %>
-      </tbody>
+      <%= form_tag new_move_to_trash_conversations_path, method: :put do %>
+        <tbody>
+        
+          <% @conversations.each do |conversation| %>
+            <tr class="<%= style_unread_conversation(conversation) %>" >
+              <td><%= check_box_tag "conversation_ids[]", conversation.id %></td>
+              <td><%= conversation.sender_name %></td>
+              <td><%= link_to "點選", toggle_pinned_conversation_path(conversation), id: "conversation_id_#{conversation.id}", method: :put, remote: true, class: "#{conversation.pin ? 'pinned' : ''} pin_item" %></td>
+              <td><%= link_to conversation.subject, conversation_path(conversation) %></td>
+              <td><small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%F %T") %></span>)</small></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+        <%= submit_tag "Move to trash" %>
+      <% end %>
+      
     </table>
 </li>

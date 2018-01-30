@@ -13,6 +13,8 @@ class ConversationsController < ApplicationController
       @conversations = @conversations.sentbox(current_user)
     elsif @box.eql? "unread"
       @conversations = @conversations.unread(current_user)
+      # byebug
+      Notification.user_unread(current_user).update_all(show_notification: false)
       # .inbox.unread(current_user)
     elsif @box.eql? "read"
       @conversations = @conversations.read(current_user)
@@ -23,7 +25,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation.mark_as_read(current_user)
+    @conversation.mark_as_read(current_user) if @conversation.is_read?(current_user)
   end
 
   def reply
