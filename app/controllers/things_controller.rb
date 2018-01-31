@@ -9,7 +9,7 @@ class ThingsController < ApplicationController
         render pdf: "Your_filename",
         template: "things/index.pdf.erb",
         locals: {subjects: @subjects}
-        # layout: 'application.html'
+        # layout: 'application'
       end
     end
   end

@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :get_mailbox
-  before_action :get_conversation, except: [:index, :empty_trash]
+  before_action :get_conversation, except: [:index, :empty_trash, :new_move_to_trash]
   before_action :get_box, only: [:index]
 
   def index
@@ -13,7 +13,7 @@ class ConversationsController < ApplicationController
       @conversations = @conversations.sentbox(current_user)
     elsif @box.eql? "unread"
       @conversations = @conversations.unread(current_user)
-      # byebug
+    
       Notification.user_unread(current_user).update_all(show_notification: false)
       # .inbox.unread(current_user)
     elsif @box.eql? "read"
@@ -25,7 +25,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation.mark_as_read(current_user) if @conversation.is_read?(current_user)
+    @conversation.mark_as_read(current_user) if @conversation.is_unread?(current_user)
   end
 
   def reply
@@ -47,11 +47,11 @@ class ConversationsController < ApplicationController
   end
 
   def new_move_to_trash
-    byebug
+    @conversations.where(id: params[:conversation_ids]).each do |conversation|
+      conversation.move_to_trash(current_user)
+    end
+    flash[:success] = 'The conøversation was moved to trash.'
     redirect_to conversations_path
-    # @conversation.move_to_trash(current_user)
-    # flash[:success] = 'The conversation was moved to trash.'
-    # redirect_to conversations_path
   end
 
   def restore
@@ -61,7 +61,7 @@ class ConversationsController < ApplicationController
   end
 
   def empty_trash
-    @mailbox.trash.each do |conversation|
+    @conversations.trash(current_user).each do |conversation|
       conversation.receipts_for(current_user).update_all(deleted: true)
     end
     flash[:success] = 'Your trash was cleaned!'

@@ -3,7 +3,7 @@ ActiveAdmin.register_page "Conversations" do
   controller do
     REPLY_SUBJECT_PREFIX = "Re:"
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     before_action :get_mailbox
     before_action :get_conversation, except: [:index, :empty_trash]
     before_action :get_box, only: [:index]
