@@ -14,7 +14,7 @@
     <table class="conversation">
       <thead>
         <tr>
-          <th></th>
+          <th id="select_all">全選</th>
           <th>寄件人<%= link_to "▲", sort_url(@q, :messages_sender_id, default_order: :desc) %> 
           <%= link_to "▼", sort_url(@q, :messages_sender_id, default_order: :asc) %></th>
           <th>重要<%= link_to "▲", sort_url(@q, :pin, default_order: :desc) %> <%= link_to "▼", sort_url(@q, :pin, default_order: :asc) %></th>
