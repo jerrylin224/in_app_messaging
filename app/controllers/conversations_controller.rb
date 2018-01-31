@@ -61,11 +61,11 @@ class ConversationsController < ApplicationController
   end
 
   def empty_trash
-    @conversations.trash(current_user).each do |conversation|
+    @conversations.where(id: params[:conversation_ids]).each do |conversation|
       conversation.receipts_for(current_user).update_all(deleted: true)
     end
     flash[:success] = 'Your trash was cleaned!'
-    redirect_to conversations_path
+    redirect_to :back
   end
 
   def mark_as_read
