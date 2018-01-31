@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load',function() {
   var pinned;
   $(".conversation .pin_item").click(function (e){
     e.preventDefault();
