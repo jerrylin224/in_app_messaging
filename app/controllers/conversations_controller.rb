@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :get_mailbox
-  before_action :get_conversation, except: [:index, :empty_trash, :new_move_to_trash]
+  before_action :get_conversation, except: [:index, :empty_trash, :new_move_to_trash, :change_trash_message_state]
   before_action :get_box, only: [:index]
 
   def index
@@ -55,9 +55,12 @@ class ConversationsController < ApplicationController
   end
 
   def restore
-    @conversation.untrash(current_user)
+    @conversations.where(id: params[:conversation_ids]).each do |conversation|
+      conversation.untrash(current_user)
+    end
+
     flash[:success] = 'The conversation was restored.'
-    redirect_to conversations_path
+    redirect_to :back
   end
 
   def empty_trash
@@ -83,6 +86,14 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js { head :ok }
+    end
+  end
+
+  def change_trash_message_state
+    if params[:restore]
+      restore
+    else
+      empty_trash
     end
   end
 

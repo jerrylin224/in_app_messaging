@@ -11,8 +11,8 @@
   <% end %>
   <%= image_tag current_user.image.thumb.url %>
   <% if @box == "trash" %>
-    <%= render partial: "form", locals: {submit_tag_value: "Delete trash", action: empty_trash_conversations_path, method: :delete } %>
+    <%= render partial: "form", locals: { action: change_trash_message_state_conversations_path } %>
   <% else %>
-    <%= render partial: "form", locals: {submit_tag_value: "Move to trash", action: new_move_to_trash_conversations_path, method: :put } %>
+    <%= render partial: "form", move_to_trash: true, locals: { action: new_move_to_trash_conversations_path } %>
   <% end %>
 </li>

@@ -48,7 +48,6 @@ class ImageUploader < CarrierWave::Uploader::Base
       manipulate! do |image|
         image.combine_options do |c|
           c.gravity 'Center'
-          c.gravity 'South'
           c.pointsize '12'
           c.font "#{Rails.root}/public/microsoft_font.ttf" 
           c.draw "text 0,0 '#{watermark}'"

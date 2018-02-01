@@ -10,4 +10,13 @@ module ConversationsHelper
   def style_unread_conversation(conversation)
     (params[:box] == UNREAD_BOX_FOLER && @conversations.count.nonzero?) ? UNREAD_BOX_FOLER : ''
   end
+
+  def submit_tag_section
+    if params[:box] == "trash"
+      submit_tag("Empty trash") +
+      submit_tag("Restore conversation", name: "restore")
+    else
+      submit_tag "Move to trash"
+    end
+  end
 end
