@@ -27,15 +27,15 @@
       </div>
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <% if Notification.havent_check_unread_box_notification_count(current_user).nonzero? %>
+          <% if Notification.seen_count(current_user).nonzero? %>
             <li class="nav-item btn-group" data-behavior="notifications">   
              <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">    
-                <span data-behavior="unread-count"><%= Notification.havent_check_unread_box_notification_count(current_user) %></span>    
+                <span data-behavior="unread-count"><%= Notification.seen_count(current_user) %></span>    
              </a>    
              <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">    
               <ul>    
                   <li>    
-                    <%= link_to "個人訊息頁", root_path(:box => "unread") %>    
+                    <%= link_to "查看未讀訊息", root_path(:box => "unread") %>    
                   </li>   
               </ul>   
             </div>    
