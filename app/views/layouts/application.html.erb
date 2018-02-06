@@ -27,10 +27,10 @@
       </div>
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <% if Notification.seen_count(current_user).nonzero? %>
+          <% if Notification.unseen_count(current_user).nonzero? %>
             <li class="nav-item btn-group" data-behavior="notifications">   
              <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">    
-                <span data-behavior="unread-count"><%= Notification.seen_count(current_user) %></span>    
+                <span data-behavior="unread-count"><%= Notification.unseen_count(current_user) %></span>    
              </a>    
              <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">    
               <ul>    
