@@ -18,9 +18,8 @@ Rails.application.routes.draw do
 
     collection do
       put :new_move_to_trash
-      delete :empty_trash
       put :change_trash_message_state
-      delete :change_trash_message_state
+      delete :empty_trash
     end
   end
 

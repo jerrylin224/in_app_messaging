@@ -30,7 +30,6 @@ ActiveAdmin.register_page "Conversations" do
     end
 
     private
-
       def get_mailbox
         @mailbox ||= current_admin_user.mailbox
       end
@@ -58,9 +57,4 @@ ActiveAdmin.register_page "Conversations" do
       render partial: "admin/conversations/index"
     end
   end  
-
-
-  sidebar "Test Sidebar" do
-    "Hi World"
-  end
 end

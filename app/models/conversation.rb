@@ -8,7 +8,7 @@ class Conversation < Mailboxer::Conversation
   # and move unread conversation to trash if same message is trashed in inbox
   scope :unread, lambda {|participant|
     participant(participant).merge(Mailboxer::Receipt.is_unread.not_trash.not_deleted)
-  }  
+  }
 
   def sender_name
     last_sender.name

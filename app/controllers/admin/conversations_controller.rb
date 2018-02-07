@@ -67,6 +67,7 @@ class Admin::ConversationsController < ApplicationController
   private
 
     def get_mailbox
+      byebug
       @mailbox ||= current_user.mailbox
     end
 

@@ -8,7 +8,6 @@ ActiveAdmin.register_page "Messages" do
     end
 
     def create
-      byebug
       case params[:receipients]
       when "all"
         recipients = User.all
