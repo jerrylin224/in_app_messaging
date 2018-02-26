@@ -34,8 +34,8 @@ gem 'wkhtmltopdf-binary'
 # admin development
 gem 'activeadmin'
 gem 'cancan' # or cancancan
-gem 'draper'
-gem 'pundit'
+# gem 'draper'
+# gem 'pundit'
 gem 'devise'
 
 # in-app message
