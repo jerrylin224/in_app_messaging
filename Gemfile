@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,43 +25,54 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'kaminari'
-gem 'activeadmin'
+
 gem 'ransack'
-gem 'carrierwave', '~> 1.0'
-gem 'mini_magick'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'rspec'
+# gem 'pg', '0.20.0'
 
-# Plus integrations with:
+# admin development
+gem 'activeadmin'
 gem 'cancan' # or cancancan
 gem 'draper'
 gem 'pundit'
 gem 'devise'
+
+# in-app message
 gem 'mailboxer'
 gem 'chosen-rails'
-# gem 'sass-rails', '~> 4.0.5'
 gem 'gravatar_image_tag'
+
+# image upload
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem "fog-google"
+gem "google-api-client", "> 0.8.5", "< 0.9"
+gem "mime-types"
+
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-turbolinks'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+group :test do
+  gem 'pg', '0.20.0'
+  gem 'rspec'
+  gem 'factory_bot_rails'
+end
 
 group :development, :test do
+  gem 'pg', '0.20.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.7'
-  gem 'factory_bot_rails'
   gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :production do
+  gem 'pg', '0.20.0'
+  gem 'rails_12factor'
 end
