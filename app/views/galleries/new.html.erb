@@ -1,3 +1,5 @@
+<%= javascript_include_tag "galleries" %>
+
 <%= form_for @gallery, html: { multipart: true } do |f| %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
@@ -14,6 +16,7 @@
   <div class="field">
     <%= f.label :image %>
     <%= f.file_field :image %>
+    <%= image_tag "", id: "image" %>
     <img id="image" />
   </div>
   <div class="actions">
