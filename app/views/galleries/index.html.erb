@@ -2,6 +2,7 @@
   <% @galleries.each do |gallery| %>
     <li>
     <%= image_tag gallery.image.thumb.url  %>
+    <%= link_to "Delete image", gallery_path(gallery), method: :delete, data: {confirm: "確認刪除"} %>
     </li>
   <% end %>
 </ul>
